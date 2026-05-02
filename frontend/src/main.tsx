@@ -4,15 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import App from './App';
 import './index.css';
-import { AuthProvider } from './contexts/AuthContext';
+import { StillwaterAuthProvider } from './stillwater/StillwaterAuthContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
+      <StillwaterAuthProvider>
         <App />
         <Toaster position="top-right" />
-      </AuthProvider>
+      </StillwaterAuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

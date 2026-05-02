@@ -13,7 +13,8 @@
     "resolveJsonModule": true,
     "allowImportingTsExtensions": false,
     "isolatedModules": true,
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "noEmit": true
   },
   "include": ["src"]
 }

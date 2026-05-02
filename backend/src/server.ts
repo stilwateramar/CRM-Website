@@ -23,6 +23,15 @@ import paymentRoutes from './routes/payments';
 import meetingRoutes from './routes/meetings';
 import aiRoutes from './routes/ai';
 
+import swAuthRoutes from './routes/stillwater/auth';
+import swDemoRoutes from './routes/stillwater/demo';
+import swAssetRoutes from './routes/stillwater/assets';
+import swScheduleRoutes from './routes/stillwater/schedule';
+import swBlogRoutes from './routes/stillwater/blog';
+import swSiteConfigRoutes from './routes/stillwater/siteConfig';
+import swChangeRequestRoutes from './routes/stillwater/changeRequests';
+import swStudentRoutes from './routes/stillwater/students';
+
 const app = express();
 const PORT = Number(process.env.PORT || 5001);
 
@@ -63,6 +72,18 @@ const apiLimiter = rateLimit({
 app.use('/api', apiLimiter);
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok', service: 'yogify-api' }));
+app.get('/api/stillwater/health', (_req, res) =>
+  res.json({ status: 'ok', service: 'stillwater-api' })
+);
+
+app.use('/api/stillwater/auth', swAuthRoutes);
+app.use('/api/stillwater/demo-requests', swDemoRoutes);
+app.use('/api/stillwater/assets', swAssetRoutes);
+app.use('/api/stillwater/schedule', swScheduleRoutes);
+app.use('/api/stillwater/blog', swBlogRoutes);
+app.use('/api/stillwater/site-config', swSiteConfigRoutes);
+app.use('/api/stillwater/change-requests', swChangeRequestRoutes);
+app.use('/api/stillwater/students', swStudentRoutes);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/studios', studioRoutes);
