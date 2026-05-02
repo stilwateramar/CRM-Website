@@ -64,7 +64,7 @@ CRM-Website/
 cd backend
 npm install
 cp .env.example .env   # fill in secrets
-npm run dev            # http://localhost:5000
+npm run dev            # http://localhost:5001
 ```
 
 ### Frontend
