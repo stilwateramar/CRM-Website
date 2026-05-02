@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stillwater — The Global Community for Holistic Health & Wellness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:        #1a1f1c;
+    --ink-soft:   #2c332e;
+    --paper:      #f4efe6;
+    --paper-warm: #ece4d3;
+    --sage:       #6b7d6a;
+    --sage-deep:  #3f4f43;
+    --moss:       #515f4a;
+    --terracotta: #b8674a;
+    --gold:       #c9a96a;
+    --water:      #87a0a8;
+    --line:       rgba(26, 31, 28, 0.18);
+    --line-soft:  rgba(26, 31, 28, 0.08);
+    --shadow-soft: 0 30px 60px -30px rgba(26, 31, 28, 0.25);
+    --shadow-card: 0 1px 0 rgba(255,255,255,0.6) inset, 0 20px 40px -25px rgba(26, 31, 28, 0.3);
+    --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+    --sans:  'Inter Tight', system-ui, sans-serif;
+    --script: 'Caveat', cursive;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.12 0 0 0 0 0.1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  .serif    { font-family: var(--serif); }
+  .italic   { font-style: italic; }
+  .script   { font-family: var(--script); font-weight: 500; }
+
+  /* ============== TOP NAV ============== */
+  nav.topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(244, 239, 230, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line-soft);
+    transition: padding 0.3s ease;
+  }
+
+  nav.topbar.scrolled { padding: 12px 48px; }
+
+  .brand {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .brand-mark {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--water), var(--sage-deep));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3), 0 2px 8px rgba(63,79,67,0.4);
+    position: relative;
+  }
+  .brand-mark::after {
+    content: '';
+    position: absolute; inset: 4px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.4);
+  }
+
+  .nav-links {
+    display: flex; gap: 38px; align-items: center;
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .nav-links a { position: relative; transition: color 0.3s; padding: 4px 0; }
+  .nav-links a::after {
+    content: '';
+    position: absolute; left: 0; bottom: 0;
+    width: 0; height: 1px;
+    background: var(--ink);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+
+  .provider-link {
+    color: var(--terracotta) !important;
+    font-style: italic;
+    font-family: var(--serif);
+    font-size: 16px !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+  }
+
+  .nav-cta {
+    display: flex; gap: 10px; align-items: center;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.5px;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: var(--sans);
+    white-space: nowrap;
+  }
+
+  .btn-ghost {
+    color: var(--ink);
+    border: 1px solid var(--line);
+    background: transparent;
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .btn-solid {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-solid:hover { background: var(--sage-deep); transform: translateY(-1px); }
+
+  .btn-terracotta {
+    background: var(--terracotta);
+    color: var(--paper);
+  }
+  .btn-terracotta:hover { background: #a0593e; transform: translateY(-1px); }
+
+  /* ============== HERO ============== */
+  header.hero {
+    min-height: 100vh;
+    padding: 140px 48px 80px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    background:
+      radial-gradient(ellipse 800px 600px at 85% 20%, rgba(135, 160, 168, 0.18), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 10% 80%, rgba(184, 103, 74, 0.10), transparent 60%),
+      var(--paper);
+    overflow: hidden;
+  }
+
+  /* Decorative line art */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%; right: -200px;
+    width: 700px; height: 700px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 50%; right: -100px;
+    width: 500px; height: 500px;
+    border: 1px solid var(--line-soft);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 720px; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 36px; height: 1px;
+    background: var(--sage-deep);
+  }
+
+  h1.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(48px, 6.8vw, 96px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -2px;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  h1.hero-title em {
+    font-style: italic;
+    color: var(--sage-deep);
+    font-weight: 300;
+  }
+
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 40px;
+    max-width: 540px;
+  }
+
+  .hero-cta-row {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+
+  .btn-lg {
+    padding: 16px 32px;
+    font-size: 14px;
+  }
+
+  .seeker-count {
+    display: flex; align-items: center; gap: 16px;
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  .avatar-stack {
+    display: flex;
+  }
+  .avatar-stack span {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--paper);
+    margin-left: -10px;
+    background-size: cover;
+    background-position: center;
+  }
+  .avatar-stack span:first-child { margin-left: 0; }
+  .avatar-stack span:nth-child(1) { background: linear-gradient(135deg, var(--sage), var(--sage-deep)); }
+  .avatar-stack span:nth-child(2) { background: linear-gradient(135deg, var(--terracotta), #8b4630); }
+  .avatar-stack span:nth-child(3) { background: linear-gradient(135deg, var(--water), #5a7d85); }
+  .avatar-stack span:nth-child(4) { background: linear-gradient(135deg, var(--gold), #9c8048); }
+
+  /* Hero visual — meditation circle */
+  .hero-visual {
+    position: relative;
+    height: 540px;
+    z-index: 2;
+  }
+
+  .meditation-orb {
+    position: absolute;
+    inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--sage);
+    animation: breathe 6s ease-in-out infinite;
+  }
+  .ring-1 { width: 380px; height: 380px; opacity: 0.4; animation-delay: 0s; }
+  .ring-2 { width: 300px; height: 300px; opacity: 0.5; animation-delay: 0.5s; }
+  .ring-3 { width: 220px; height: 220px; opacity: 0.6; animation-delay: 1s; }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50%      { transform: scale(1.05); opacity: 0.7; }
+  }
+
+  .center-orb {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #b8c5b3, var(--sage-deep) 70%, #2a3a30);
+    box-shadow:
+      inset -10px -15px 40px rgba(0,0,0,0.35),
+      inset 10px 10px 25px rgba(255,255,255,0.15),
+      0 30px 70px -20px rgba(63, 79, 67, 0.5);
+    position: relative;
+  }
+  .center-orb::after {
+    content: '';
+    position: absolute;
+    top: 22%; left: 30%;
+    width: 40px; height: 25px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    filter: blur(8px);
+  }
+
+  .floating-tag {
+    position: absolute;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-card);
+    display: flex; align-items: center; gap: 8px;
+    animation: float 5s ease-in-out infinite;
+  }
+  .floating-tag .dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  .tag-1 { top: 18%; left: -10px; animation-delay: 0s; }
+  .tag-1 .dot { background: var(--terracotta); }
+  .tag-2 { top: 42%; right: -20px; animation-delay: 1s; }
+  .tag-2 .dot { background: var(--sage); }
+  .tag-3 { bottom: 18%; left: 8%; animation-delay: 2s; }
+  .tag-3 .dot { background: var(--water); }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+
+  /* ============== PROVIDER SECTION ============== */
+  section.providers {
+    padding: 140px 48px 120px;
+    background: var(--paper-warm);
+    position: relative;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .section-header {
+    max-width: 1300px;
+    margin: 0 auto 80px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: end;
+  }
+
+  .section-header .eyebrow {
+    margin-bottom: 0;
+  }
+
+  h2.section-title {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5vw, 68px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -1.2px;
+    margin-top: 14px;
+  }
+  h2.section-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .section-header-text {
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 480px;
+  }
+
+  /* AI Tools grid */
+  .tools-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .tool-card {
+    background: var(--paper);
+    border: 1px solid var(--line-soft);
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex; flex-direction: column;
+    min-height: 320px;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-soft);
+    border-color: var(--line);
+  }
+
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle at top right, var(--paper-warm), transparent 70%);
+    pointer-events: none;
+  }
+
+  .tool-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .tool-card:nth-child(1) .tool-icon { background: rgba(184, 103, 74, 0.12); color: var(--terracotta); }
+  .tool-card:nth-child(2) .tool-icon { background: rgba(63, 79, 67, 0.12); color: var(--sage-deep); }
+  .tool-card:nth-child(3) .tool-icon { background: rgba(135, 160, 168, 0.18); color: #4d6a72; }
+  .tool-card:nth-child(4) .tool-icon { background: rgba(201, 169, 106, 0.18); color: #8b6f3a; }
+
+  .tool-icon svg { width: 28px; height: 28px; }
+
+  .tool-number {
+    position: absolute;
+    top: 32px; right: 32px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    opacity: 0.4;
+  }
+
+  .tool-card h3 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+  }
+  .tool-card h3 em { font-style: italic; color: var(--sage-deep); font-weight: 400; }
+
+  .tool-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    flex-grow: 1;
+  }
+
+  .video-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+    padding: 10px 0;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 20px;
+    transition: gap 0.3s ease;
+  }
+  .video-link:hover { gap: 16px; }
+
+  .play-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .video-link:hover .play-icon { background: var(--terracotta); transform: scale(1.08); }
+
+  .play-icon svg { width: 12px; height: 12px; margin-left: 2px; }
+
+  /* ============== DEMO FORM ============== */
+  section.demo {
+    padding: 140px 48px;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  section.demo::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(184, 103, 74, 0.15), transparent 60%);
+    pointer-events: none;
+  }
+  section.demo::after {
+    content: '';
+    position: absolute;
+    bottom: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(135, 160, 168, 0.12), transparent 60%);
+    pointer-events: none;
+  }
+
+  .demo-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .demo-wrap .eyebrow { color: var(--gold); }
+  .demo-wrap .eyebrow::before { background: var(--gold); }
+
+  .demo-wrap h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 4.5vw, 60px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 28px;
+  }
+  .demo-wrap h2 em { font-style: italic; color: var(--gold); }
+
+  .demo-wrap > div:first-child > p {
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.6;
+    color: rgba(244, 239, 230, 0.75);
+    margin-bottom: 40px;
+  }
+
+  .demo-features {
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .demo-feature {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 15px;
+    color: rgba(244, 239, 230, 0.85);
+  }
+  .demo-feature::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Form */
+  form.demo-form {
+    background: rgba(244, 239, 230, 0.04);
+    border: 1px solid rgba(244, 239, 230, 0.12);
+    border-radius: 24px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .field { margin-bottom: 16px; }
+
+  .field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(244, 239, 230, 0.6);
+    margin-bottom: 8px;
+  }
+
+  .field input, .field select, .field textarea {
+    width: 100%;
+    background: rgba(244, 239, 230, 0.06);
+    border: 1px solid rgba(244, 239, 230, 0.15);
+    color: var(--paper);
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    transition: all 0.3s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(244, 239, 230, 0.09);
+  }
+  .field textarea { resize: vertical; min-height: 90px; font-family: var(--sans); }
+  .field select option { background: var(--ink); color: var(--paper); }
+
+  form.demo-form button[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+  form.demo-form button[type="submit"]:hover {
+    background: var(--paper);
+    transform: translateY(-1px);
+  }
+
+  /* ============== FOOTER ============== */
+  footer {
+    padding: 80px 48px 40px;
+    background: var(--paper-warm);
+    border-top: 1px solid var(--line-soft);
+  }
+  .footer-wrap {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-wrap h4 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .footer-wrap ul { list-style: none; }
+  .footer-wrap ul li { margin-bottom: 10px; font-size: 14px; }
+  .footer-wrap ul li a { color: var(--ink-soft); transition: color 0.3s; }
+  .footer-wrap ul li a:hover { color: var(--ink); }
+
+  .footer-brand p {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin-top: 16px;
+    line-height: 1.6;
+    max-width: 320px;
+  }
+
+  .footer-bottom {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 30px;
+    border-top: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .footer-bottom .quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  /* ============== MODAL ============== */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(26, 31, 28, 0.55);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: fadeIn 0.3s ease;
+  }
+  .modal-overlay.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal {
+    background: var(--paper);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 480px;
+    padding: 0;
+    position: relative;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.4);
+    animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow: hidden;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 18px; right: 18px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--paper-warm);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+    z-index: 5;
+  }
+  .modal-close:hover { background: var(--ink); color: var(--paper); }
+
+  .modal-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .modal-tab {
+    padding: 18px 8px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: center;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    line-height: 1.3;
+  }
+  .modal-tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--terracotta);
+  }
+  .modal-tab:hover:not(.active) { background: var(--paper-warm); }
+
+  .modal-body { padding: 36px 36px 32px; }
+
+  .modal-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .modal-header h3 {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .modal-header h3 em { font-style: italic; color: var(--sage-deep); }
+  .modal-header p {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .modal-pane { display: none; }
+  .modal-pane.active { display: block; }
+
+  .modal .field { margin-bottom: 14px; }
+  .modal .field label {
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .modal .field input, .modal .field select {
+    background: var(--paper-warm);
+    border: 1px solid transparent;
+    color: var(--ink);
+  }
+  .modal .field input:focus, .modal .field select:focus {
+    border-color: var(--sage);
+    background: var(--paper);
+  }
+
+  .modal-submit {
+    width: 100%;
+    padding: 14px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+    transition: all 0.3s;
+  }
+  .modal-submit:hover { background: var(--sage-deep); }
+
+  .modal-divider {
+    display: flex; align-items: center;
+    gap: 12px; margin: 22px 0;
+    color: var(--ink-soft);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .modal-divider::before, .modal-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line-soft);
+  }
+
+  .social-btn {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .social-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .toggle-method {
+    display: flex;
+    background: var(--paper-warm);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 16px;
+  }
+  .toggle-method button {
+    flex: 1;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 7px;
+    color: var(--ink-soft);
+    transition: all 0.3s;
+  }
+  .toggle-method button.active {
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  .modal-footer-text {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .modal-footer-text a {
+    color: var(--terracotta);
+    font-weight: 500;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .code-input-group {
+    display: flex;
+    gap: 8px;
+  }
+  .code-digit {
+    flex: 1;
+    text-align: center;
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    padding: 14px 0 !important;
+    letter-spacing: 2px;
+  }
+
+  .info-banner {
+    background: rgba(135, 160, 168, 0.12);
+    border-left: 3px solid var(--water);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 980px) {
+    nav.topbar { padding: 14px 24px; }
+    nav.topbar .nav-links { display: none; }
+    .brand { font-size: 22px; }
+
+    header.hero {
+      grid-template-columns: 1fr;
+      padding: 120px 24px 60px;
+      gap: 50px;
+    }
+    .hero-visual { height: 380px; }
+    .ring-1 { width: 280px; height: 280px; }
+    .ring-2 { width: 220px; height: 220px; }
+    .ring-3 { width: 160px; height: 160px; }
+    .center-orb { width: 110px; height: 110px; }
+
+    section.providers, section.demo { padding: 80px 24px; }
+
+    .section-header {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+
+    .tools-grid { grid-template-columns: 1fr; }
+
+    .demo-wrap { grid-template-columns: 1fr; gap: 50px; }
+    form.demo-form { padding: 28px; }
+    .form-row { grid-template-columns: 1fr; }
+
+    .footer-wrap { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+    .modal-body { padding: 28px 22px; }
+    .modal-header h3 { font-size: 26px; }
+    .modal-tab { font-size: 10px; padding: 14px 4px; }
+  }
+
+  @media (max-width: 540px) {
+    nav.topbar { padding: 12px 16px; }
+    .nav-cta .btn:first-child { display: none; }
+    .footer-wrap { grid-template-columns: 1fr; }
+  }
+
+  /* Reveal animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ============== TOP NAV ============== -->
+<nav class="topbar" id="topbar">
+  <a href="#" class="brand">
+    <span class="brand-mark"></span>
+    Stillwater
+  </a>
+  <div class="nav-links">
+    <a href="#vision">Vision</a>
+    <a href="#tools" class="provider-link">For Holistic Health Providers →</a>
+    <a href="#demo">Contact</a>
+  </div>
+  <div class="nav-cta">
+    <button class="btn btn-ghost" onclick="openModal('login')">Log in</button>
+    <button class="btn btn-solid" onclick="openModal('signup')">Sign up</button>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<header class="hero" id="vision">
+  <div class="hero-content">
+    <div class="eyebrow reveal">A global community for holistic wellness</div>
+    <h1 class="hero-title reveal">
+      Stillness in a <em>restless</em> world,<br>
+      guided by the <em>quiet intelligence</em> of AI.
+    </h1>
+    <p class="hero-sub reveal">
+      Stillwater unites seekers and holistic health providers across the world — yoga, meditation, ayurveda, breathwork — through an AI-powered ecosystem that honours ancient practice and modern craft.
+    </p>
+    <div class="hero-cta-row reveal">
+      <button class="btn btn-solid btn-lg" onclick="openModal('signup')">Begin your journey →</button>
+      <a href="#tools" class="btn btn-ghost btn-lg">For practitioners</a>
+    </div>
+    <div class="seeker-count reveal">
+      <div class="avatar-stack">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <span><strong style="font-weight:500; color:var(--ink);">Hundreds of seekers</strong> have already found their stillness.</span>
+    </div>
+  </div>
+
+  <div class="hero-visual reveal">
+    <div class="meditation-orb">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="center-orb"></div>
+    </div>
+    <div class="floating-tag tag-1"><span class="dot"></span> Yoga</div>
+    <div class="floating-tag tag-2"><span class="dot"></span> Meditation</div>
+    <div class="floating-tag tag-3"><span class="dot"></span> Ayurveda</div>
+  </div>
+</header>
+
+<!-- ============== AI TOOLS FOR PROVIDERS ============== -->
+<section class="providers" id="tools">
+  <div class="section-header">
+    <div class="reveal">
+      <div class="eyebrow">For Holistic Health Providers</div>
+      <h2 class="section-title">
+        AI tools that <em>honour</em> the practice — and grow it.
+      </h2>
+    </div>
+    <p class="section-header-text reveal">
+      Yoga teachers, meditation guides, and wellness practitioners deserve technology that protects their craft. Stillwater's intelligent toolkit handles the noise so you can focus on the silence.
+    </p>
+  </div>
+
+  <div class="tools-grid">
+
+    <div class="tool-card reveal">
+      <span class="tool-number">i.</span>
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          <circle cx="9" cy="10" r="1" fill="currentColor"/>
+          <circle cx="13" cy="10" r="1" fill="currentColor"/>
+          <circle cx="17" cy="10" r="1" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3>AI Agentic <em>CRM</em></h3>
+      <p>An intelligent agent that nurtures every student relationship — from first enquiry to lifelong practice. Books sessions, follows up gently, remembers what each seeker needs, and frees you from the inbox.</p>
+      <a href="#" class="video-link" onclick="alert('Demo video coming soon — replace this with your hosted video link.'); return false;">
+        <span class="play-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        Watch a 90-second demo
+      </a>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-number">ii.</span>
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M3 9h18"/>
+          <path d="M9 21V9"/>
+        </svg>
+      </div>
+      <h3>AI Website <em>Builder</em></h3>
+      <p>Describe your practice in a sentence. Receive a serene, fully responsive website — with class schedules, booking, payments, and your story told beautifully. No designers, no developers, no compromise.</p>
+      <a href="#" class="video-link" onclick="alert('Demo video coming soon — replace this with your hosted video link.'); return false;">
+        <span class="play-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        Watch a 90-second demo
+      </a>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-number">iii.</span>
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <polygon points="23 7 16 12 23 17 23 7"/>
+          <rect x="1" y="5" width="15" height="14" rx="2"/>
+        </svg>
+      </div>
+      <h3>AI Video for <em>social media</em></h3>
+      <p>Turn one short clip into a week of social content. Reels, shorts, and meditative trailers — captioned, branded, and platform-ready. Reach the seekers who are quietly searching for you.</p>
+      <a href="#" class="video-link" onclick="alert('Demo video coming soon — replace this with your hosted video link.'); return false;">
+        <span class="play-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        Watch a 90-second demo
+      </a>
+    </div>
+
+    <div class="tool-card reveal">
+      <span class="tool-number">iv.</span>
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+      <h3>AI <em>Avatar</em> Generation</h3>
+      <p>A composed, studio-quality digital likeness of you — for thumbnails, course pages, and guided sessions. Always camera-ready. Always recognisable. Always you.</p>
+      <a href="#" class="video-link" onclick="alert('Demo video coming soon — replace this with your hosted video link.'); return false;">
+        <span class="play-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        Watch a 90-second demo
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== DEMO REQUEST ============== -->
+<section class="demo" id="demo">
+  <div class="demo-wrap">
+    <div class="reveal">
+      <div class="eyebrow">Reach out to our team</div>
+      <h2>Let us walk you through <em>Stillwater</em>.</h2>
+      <p>Tell us a little about your practice. We'll arrange a personal demo with our team — a quiet conversation about how Stillwater can support your work and your seekers.</p>
+      <div class="demo-features">
+        <div class="demo-feature">A 30-minute, no-obligation walkthrough</div>
+        <div class="demo-feature">Tailored to your specific practice and offerings</div>
+        <div class="demo-feature">Direct conversation with our founding team</div>
+        <div class="demo-feature">Onboarding support if you choose to join us</div>
+      </div>
+    </div>
+
+    <form class="demo-form reveal" onsubmit="handleDemoSubmit(event)">
+      <div class="form-row">
+        <div class="field">
+          <label>First name</label>
+          <input type="text" name="firstName" required placeholder="Your first name" />
+        </div>
+        <div class="field">
+          <label>Last name</label>
+          <input type="text" name="lastName" required placeholder="Your last name" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Email address</label>
+        <input type="email" name="email" required placeholder="you@practice.com" />
+      </div>
+      <div class="field">
+        <label>Phone (with country code)</label>
+        <input type="tel" name="phone" required placeholder="+91 98765 43210" />
+      </div>
+      <div class="field">
+        <label>Your practice</label>
+        <select name="practice" required>
+          <option value="">Select your offering</option>
+          <option>Yoga teacher / studio</option>
+          <option>Meditation guide</option>
+          <option>Ayurveda practitioner</option>
+          <option>Breathwork / sound healer</option>
+          <option>Holistic nutritionist</option>
+          <option>Wellness retreat</option>
+          <option>Other holistic practitioner</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Tell us a little about what you offer</label>
+        <textarea name="message" placeholder="Your background, your students, your hopes for working together..."></textarea>
+      </div>
+      <button type="submit">Request a demo →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-wrap">
+    <div class="footer-brand">
+      <a href="#" class="brand">
+        <span class="brand-mark"></span>
+        Stillwater
+      </a>
+      <p>The global community of holistic healing — where ancient practice meets the quiet craft of intelligent technology.</p>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#vision">Our Vision</a></li>
+        <li><a href="#tools">For Practitioners</a></li>
+        <li><a href="#demo">Request a Demo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Account</h4>
+      <ul>
+        <li><a href="#" onclick="openModal('login'); return false;">Seeker login</a></li>
+        <li><a href="#" onclick="openModal('login'); switchTab('provider'); return false;">Provider login</a></li>
+        <li><a href="#" onclick="openModal('login'); switchTab('student'); return false;">Student login</a></li>
+        <li><a href="#" onclick="openModal('login'); switchTab('admin'); return false;">Admin</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Stillwater. All rights reserved.</span>
+    <span class="quote">"Healing is a matter of time, but it is sometimes also a matter of opportunity."</span>
+  </div>
+</footer>
+
+<!-- ============== AUTH MODAL ============== -->
+<div class="modal-overlay" id="authModal" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-tab="seeker" onclick="switchTab('seeker')">Seeker</button>
+      <button class="modal-tab" data-tab="student" onclick="switchTab('student')">Student</button>
+      <button class="modal-tab" data-tab="provider" onclick="switchTab('provider')">Provider</button>
+      <button class="modal-tab" data-tab="admin" onclick="switchTab('admin')">Admin</button>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- SEEKER PANE -->
+      <div class="modal-pane active" id="pane-seeker">
+        <div class="modal-header">
+          <h3 id="seekerTitle">Welcome, <em>seeker</em></h3>
+          <p id="seekerSub">Begin or continue your journey to stillness.</p>
+        </div>
+
+        <div class="toggle-method">
+          <button class="active" onclick="toggleSeekerMethod(this, 'mobile')">Mobile</button>
+          <button onclick="toggleSeekerMethod(this, 'email')">Email</button>
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event, 'seeker')">
+          <div id="seeker-mobile-fields">
+            <div class="field">
+              <label>Mobile number</label>
+              <input type="tel" placeholder="+91 98765 43210" />
+            </div>
+          </div>
+          <div id="seeker-email-fields" style="display:none;">
+            <div class="field">
+              <label>Email address</label>
+              <input type="email" placeholder="you@email.com" />
+            </div>
+          </div>
+          <button type="submit" class="modal-submit" id="seekerBtn">Send verification code</button>
+        </form>
+
+        <div class="modal-divider">or</div>
+
+        <button class="social-btn" onclick="alert('Google sign-in flow goes here.')">
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <p class="modal-footer-text">
+          New to Stillwater? <a href="#" onclick="toggleSeekerSignup(); return false;">Create an account</a>
+        </p>
+      </div>
+
+      <!-- STUDENT PANE -->
+      <div class="modal-pane" id="pane-student">
+        <div class="modal-header">
+          <h3>Student <em>access</em></h3>
+          <p>Enter the code given to you by your teacher.</p>
+        </div>
+
+        <div class="info-banner">
+          You'll find your access code in the welcome message from your yoga, meditation, or wellness teacher.
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event, 'student')">
+          <div class="field">
+            <label>Your name</label>
+            <input type="text" placeholder="Your full name" required />
+          </div>
+          <div class="field">
+            <label>Provider access code</label>
+            <div class="code-input-group">
+              <input class="code-digit" maxlength="1" required />
+              <input class="code-digit" maxlength="1" required />
+              <input class="code-digit" maxlength="1" required />
+              <input class="code-digit" maxlength="1" required />
+              <input class="code-digit" maxlength="1" required />
+              <input class="code-digit" maxlength="1" required />
+            </div>
+          </div>
+          <button type="submit" class="modal-submit">Enter your practice →</button>
+        </form>
+
+        <p class="modal-footer-text">
+          Don't have a code? <a href="#" onclick="switchTab('seeker'); return false;">Continue as a seeker instead</a>
+        </p>
+      </div>
+
+      <!-- PROVIDER PANE -->
+      <div class="modal-pane" id="pane-provider">
+        <div class="modal-header">
+          <h3>Provider <em>portal</em></h3>
+          <p>For yoga, meditation & holistic health practitioners.</p>
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event, 'provider')">
+          <div class="field">
+            <label>Email address</label>
+            <input type="email" placeholder="you@practice.com" required />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" placeholder="••••••••" required />
+          </div>
+          <button type="submit" class="modal-submit">Log in to your practice</button>
+        </form>
+
+        <p class="modal-footer-text">
+          New practitioner? <a href="#demo" onclick="closeModal()">Request a demo</a> or <a href="#" onclick="alert('Provider sign-up flow.'); return false;">apply to join</a>
+        </p>
+      </div>
+
+      <!-- ADMIN PANE -->
+      <div class="modal-pane" id="pane-admin">
+        <div class="modal-header">
+          <h3>Stillwater <em>admin</em></h3>
+          <p>Restricted access for the Stillwater team.</p>
+        </div>
+
+        <div class="info-banner">
+          This area is for authorised Stillwater team members only. All access is logged and audited.
+        </div>
+
+        <form onsubmit="handleAuthSubmit(event, 'admin')">
+          <div class="field">
+            <label>Admin email</label>
+            <input type="email" placeholder="admin@stillwater.you" required />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" placeholder="••••••••" required />
+          </div>
+          <div class="field">
+            <label>Two-factor code</label>
+            <input type="text" placeholder="6-digit code" maxlength="6" required />
+          </div>
+          <button type="submit" class="modal-submit">Authenticate</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ===== Nav scroll state ===== */
+  const topbar = document.getElementById('topbar');
+  window.addEventListener('scroll', () => {
+    topbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  /* ===== Modal logic ===== */
+  const modal = document.getElementById('authModal');
+  let isSignupMode = false;
+
+  function openModal(mode) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    isSignupMode = (mode === 'signup');
+    updateSeekerCopy();
+    switchTab('seeker');
+  }
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function switchTab(name) {
+    document.querySelectorAll('.modal-tab').forEach(t => {
+      t.classList.toggle('active', t.dataset.tab === name);
+    });
+    document.querySelectorAll('.modal-pane').forEach(p => {
+      p.classList.toggle('active', p.id === 'pane-' + name);
+    });
+  }
+
+  function updateSeekerCopy() {
+    const title = document.getElementById('seekerTitle');
+    const sub = document.getElementById('seekerSub');
+    const btn = document.getElementById('seekerBtn');
+    if (isSignupMode) {
+      title.innerHTML = 'Begin your <em>journey</em>';
+      sub.textContent = 'Sign up in seconds. Welcome to the community.';
+      btn.textContent = 'Send verification code';
+    } else {
+      title.innerHTML = 'Welcome, <em>seeker</em>';
+      sub.textContent = 'Begin or continue your journey to stillness.';
+      btn.textContent = 'Send verification code';
+    }
+  }
+
+  function toggleSeekerSignup() {
+    isSignupMode = !isSignupMode;
+    updateSeekerCopy();
+  }
+
+  function toggleSeekerMethod(btn, method) {
+    btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('seeker-mobile-fields').style.display = (method === 'mobile') ? 'block' : 'none';
+    document.getElementById('seeker-email-fields').style.display = (method === 'email') ? 'block' : 'none';
+  }
+
+  // Code input auto-advance
+  document.querySelectorAll('.code-digit').forEach((input, idx, arr) => {
+    input.addEventListener('input', e => {
+      if (e.target.value && idx < arr.length - 1) arr[idx + 1].focus();
+    });
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Backspace' && !e.target.value && idx > 0) arr[idx - 1].focus();
+    });
+  });
+
+  function handleAuthSubmit(e, type) {
+    e.preventDefault();
+    alert('Authentication submitted (' + type + '). Connect this to your backend.');
+  }
+  function handleDemoSubmit(e) {
+    e.preventDefault();
+    alert('Thank you. Our team will reach out within one working day.');
+    e.target.reset();
+  }
+
+  // Esc closes modal
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  /* ===== Reveal on scroll ===== */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 80 + 'ms';
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>
