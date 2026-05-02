@@ -1,4 +1,5 @@
 import cron from 'node-cron';
+import mongoose from 'mongoose';
 import { Booking } from '../models/Booking';
 import { YogaClass } from '../models/Class';
 import { User } from '../models/User';
@@ -10,6 +11,7 @@ import { sendWhatsappText } from './whatsappService';
  */
 export function startReminderJobs() {
   cron.schedule('*/15 * * * *', async () => {
+    if (mongoose.connection.readyState !== 1) return;
     try {
       const now = Date.now();
       const lower = new Date(now + 23 * 60 * 60 * 1000 + 45 * 60 * 1000);
